@@ -7,10 +7,11 @@
 
 import React from "react"
 import PropTypes from "prop-types"
+import { Link } from "gatsby"
 import { useStaticQuery, graphql } from "gatsby"
+import "./mystyles.scss"
 
 import Header from "./header"
-import "./layout.css"
 
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
@@ -29,15 +30,13 @@ const Layout = ({ children }) => {
       <div
         style={{
           margin: `0 auto`,
-          maxWidth: 960,
+          maxWidth: 769,
           padding: `0 1.0875rem 1.45rem`,
         }}
       >
         <main>{children}</main>
         <footer>
-          © {new Date().getFullYear()}, Built with
-          {` `}
-          <a href="https://www.gatsbyjs.org">Gatsby</a>
+          <Link to="/permissions"> Permissions </Link>
         </footer>
       </div>
     </>
