@@ -4,6 +4,12 @@ import SEO from "../components/seo"
 import Datetime from "react-datetime"
 import ReCAPTCHA from "react-google-recaptcha";
 import "./datetime.css"
+const axios = require('axios').default;
+
+const datesAreOnSameDay = (first, second) =>
+  first.getFullYear() === second.getFullYear() &&
+  first.getMonth() === second.getMonth() &&
+  first.getDate() === second.getDate();
 
 class FormPage extends React.Component {
   constructor(props) {
@@ -39,7 +45,7 @@ class FormPage extends React.Component {
     if (typeof t === "string") {
       this.setState({timevalid: false });
     } else {
-      this.setState({time: t, timevalid: true });
+      this.setState({time: t.toDate(), timevalid: true });
     }
   }
   handleDescChange(event) {
@@ -55,6 +61,7 @@ class FormPage extends React.Component {
     this.setState({cap: v});
   }
 
+
   handleSubmit(event) {
     event.preventDefault()
     // check time invalid and check capcha
@@ -63,7 +70,39 @@ class FormPage extends React.Component {
       console.log("invalid")
       // TODO: Add some notification.
     } else {
-      console.log(this.state)
+
+      let sTime = new Date(this.state.time.valueOf())
+      let now = new Date();
+      now.setHours(0,0,0,0);
+      sTime.setHours(0,0,0,0);
+      if(datesAreOnSameDay(now, sTime)) {
+        this.setState({dir: "today"})
+       console.log("today")
+      } else if (sTime < now) {
+        this.setState({dir: "past"})
+      } else if (sTime > now){
+        this.setState({dir: "upcoming"})
+      }
+
+      let stuff = {
+        dir: this.state.dir,
+        name: this.state.name,
+        location: this.state.location,
+        time: this.state.time,
+        desc: this.state.desc,
+        links: this.state.links,
+        notes: this.state.notes,
+      }
+
+      // send to worker
+      axios.post('https://chad.ozpatoki.workers.dev', stuff).then(function (response) {
+        console.log(response);
+      }).catch(function (error) {
+        console.log(error);
+      });
+
+      console.log(JSON.stringify(this.state))
+
     }
   }
 
