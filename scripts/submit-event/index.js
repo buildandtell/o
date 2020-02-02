@@ -3,7 +3,7 @@ addEventListener('fetch', event => {
 })
 
 const commonHeaders = { 'content-type': 'application/json;charset=UTF-8' }
-const ghToken = '<API_TOKEN>'
+const ghToken = ''
 
 function addcors(r) {
   r.headers.set('Access-Control-Allow-Origin', '*')
@@ -22,15 +22,16 @@ function addcors(r) {
  */
 async function handleRequest(request) {
   const url = new URL(request.url)
-  let response
+  //let response
   // Add CORS headers
 
   if (request.method === 'POST') {
     const body = await request.json()
     // validate body
-    if (body.name == undefined && body.location == undefined) {
+    // TODO: Also check time
+    if ((body.name == '' || body.name == undefined) && (body.location == ''||body.location == undefined)) {
       let err = { err: 'Bad request' }
-      response = new Response(JSON.stringify(err), {
+      let response = new Response(JSON.stringify(err), {
         status: 400,
         headers: commonHeaders,
       })
@@ -39,11 +40,28 @@ async function handleRequest(request) {
 
     console.log(body)
 
-    // successful return
-    response = new Response('{"body":"Registered."}', {
-      status: 201,
-      headers: commonHeaders,
-    })
+  const r = await fetch(
+    'https://api.github.com/repos/buildandtell/o/contents/data',
+    {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'User-Agent': 'oz',
+      },
+    },
+  )
+
+  let data = await r.json()
+  console.log(data)
+
+
+  let response = new Response('{"body":"Registered."}', {
+    status: 201,
+    headers: commonHeaders,
+  })
+
+  return addcors(response)
+
   } else if (request.method === 'OPTIONS') {
     response = new Response(JSON.stringify(['OK']), {
       status: 200,
@@ -57,5 +75,4 @@ async function handleRequest(request) {
     })
   }
 
-  return addcors(response)
 }

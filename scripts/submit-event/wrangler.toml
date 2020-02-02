@@ -1,5 +1,5 @@
 name = "submit-event"
-type = "javascript"
+type = "webpack"
 account_id = "abdd5842419e0cd6af0febf688296fce"
 workers_dev = true
 route = ""
