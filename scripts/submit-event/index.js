@@ -8,7 +8,7 @@ addEventListener('fetch', event => {
 })
 
 const commonHeaders = { 'content-type': 'application/json;charset=UTF-8' }
-const ghToken = 'b8a56aab7e381ae463b3adf9bf95affc5cd5af73'
+const ghToken = ''
 
 function addcors(r) {
   r.headers.set('Access-Control-Allow-Origin', '*')

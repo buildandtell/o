@@ -11,27 +11,6 @@ const datesAreOnSameDay = (first, second) =>
   first.getMonth() === second.getMonth() &&
   first.getDate() === second.getDate();
 
-function sendDataToCFWorker(stuff){
-   return fetch('https://submit-event.ozpatoki.workers.dev/',{
-     method: 'POST',
-     headers: {
-       'Accept': 'application/json',
-       'Content-Type': 'application/json',
-     },
-     body: JSON.stringify(stuff)
-   }).then(
-       function(response) {
-         if (response.status !== 201) {
-           console.log('Looks like there was a problem. Status Code: ' + response.status);
-           return false;
-         }
-         return true
-       }
-   ).catch(function(err) {
-       return false;
-   })
-}
-
 class FormPage extends React.Component {
   constructor(props) {
     super(props);
@@ -63,6 +42,7 @@ class FormPage extends React.Component {
   }
   handleTimeChange(t) {
     // check if time is a string, if yes then add the warning
+    // TODO: Change date format DD_MM-YY
     if (typeof t === "string") {
       this.setState({timevalid: false });
     } else {
@@ -115,33 +95,14 @@ class FormPage extends React.Component {
         notes: this.state.notes,
       }
 
+      // TODO: Remove log
       console.log(JSON.stringify(stuff))
 
-      //sendDataToCFWorker(stuff)
-      //.then((e)=>{
-      //  console.log("poop")
-      //  console.log(e)
-      //})
-      //.catch((e)=>{
-      //  console.log("error")
-      //  console.log(e)
-      //})
-
-      // send to worker
-      //axios.get('https://submit-event.ozpatoki.workers.dev/').then(function (response) {
-      //  console.log(response);
-      //}).catch(function (error) {
-      //  console.log(error);
-      //});
       axios.post('https://submit-event.ozpatoki.workers.dev/add-event', stuff).then(function (response) {
         console.log(response);
       }).catch(function (error) {
         console.log(error);
       });
-
-
-
-
 
     }
   }
