@@ -5,25 +5,25 @@ const ProtestCard = () => (
 style={{
     marginBottom: "2rem"
 }}
-class="card">
-  <div class="card-content">
+className="card">
+  <div className="card-content">
     <strong>
         Human Chain
     </strong>
-    <p class="">
+    <p className="">
         Human Chain today to remember the father of this nation and his values.
     </p>
 
-    <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+    <time dateTime="2016-1-1">11:09 PM - 1 Jan 2016</time>
     <br/>
     Location: Dighalipukhuri
 
   </div>
-  <footer class="card-footer">
-    <p class="card-footer-item">
+  <footer className="card-footer">
+    <p className="card-footer-item">
       <span> More Information </span>
     </p>
-    <p class="card-footer-item">
+    <p className="card-footer-item">
       <span> Share </span>
     </p>
   </footer>

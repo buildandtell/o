@@ -11,6 +11,27 @@ const datesAreOnSameDay = (first, second) =>
   first.getMonth() === second.getMonth() &&
   first.getDate() === second.getDate();
 
+function sendDataToCFWorker(stuff){
+   return fetch('https://submit-event.ozpatoki.workers.dev/',{
+     method: 'POST',
+     headers: {
+       'Accept': 'application/json',
+       'Content-Type': 'application/json',
+     },
+     body: JSON.stringify(stuff)
+   }).then(
+       function(response) {
+         if (response.status !== 201) {
+           console.log('Looks like there was a problem. Status Code: ' + response.status);
+           return false;
+         }
+         return true
+       }
+   ).catch(function(err) {
+       return false;
+   })
+}
+
 class FormPage extends React.Component {
   constructor(props) {
     super(props);
@@ -94,8 +115,25 @@ class FormPage extends React.Component {
         notes: this.state.notes,
       }
 
+      console.log(JSON.stringify(stuff))
+
+      //sendDataToCFWorker(stuff)
+      //.then((e)=>{
+      //  console.log("poop")
+      //  console.log(e)
+      //})
+      //.catch((e)=>{
+      //  console.log("error")
+      //  console.log(e)
+      //})
+
       // send to worker
-      axios.post('https://chad.ozpatoki.workers.dev', stuff).then(function (response) {
+      //axios.get('https://submit-event.ozpatoki.workers.dev/').then(function (response) {
+      //  console.log(response);
+      //}).catch(function (error) {
+      //  console.log(error);
+      //});
+      axios.post('https://submit-event.ozpatoki.workers.dev/add-event', stuff).then(function (response) {
         console.log(response);
       }).catch(function (error) {
         console.log(error);
@@ -103,26 +141,7 @@ class FormPage extends React.Component {
 
 
 
-    fetch("https://api.github.com/repos/buildandtell/o/contents/data").then(
-    function(response) {
-      if (response.status !== 200) {
-        console.log('Looks like there was a problem. Status Code: ' +
-          response.status);
-        return;
-      }
-      // Examine the text in the response
-      response.json().then(function(data) {
-        console.log(data);
-        console.log("poop")
-      });
-    }
-    )
-    .catch(function(err) {
-    console.log('Fetch Error :-S', err);
-    });
 
-
-      //console.log(JSON.stringify(this.state))
 
     }
   }

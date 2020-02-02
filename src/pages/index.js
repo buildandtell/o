@@ -10,20 +10,20 @@ const IndexPage = () => {
     <Layout>
       <SEO title="Home"/>
     <div>
-<div class="notification">
+<div className="notification">
 The list of protests, add your protest <Link to="/add">here</Link>.
 </div>
 
 
 <div>
-  <div class="tabs is-centered">
+  <div className="tabs is-centered">
   <ul>
-    <li class="is-active"><a>Today</a></li>
+    <li className="is-active"><a>Today</a></li>
     <li><a>Upcoming</a></li>
     <li><a>Past</a></li>
   </ul>
   </div>
-  <div class="content">
+  <div className="content">
   <ProtestCard/>
   <ProtestCard/>
   <ProtestCard/>

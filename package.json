@@ -6,6 +6,7 @@
   "author": "Kyle Mathews <mathews.kyle@gmail.com>",
   "dependencies": {
     "axios": "^0.19.2",
+    "base-64": "^0.1.0",
     "bulma": "^0.8.0",
     "gatsby": "^2.19.7",
     "gatsby-image": "^2.2.39",
@@ -20,11 +21,13 @@
     "gatsby-transformer-sharp": "^2.3.13",
     "node-sass": "^4.13.1",
     "prop-types": "^15.7.2",
+    "randomstring": "^1.1.5",
     "react": "^16.12.0",
     "react-datetime": "^2.16.3",
     "react-dom": "^16.12.0",
     "react-google-recaptcha": "^2.0.1",
-    "react-helmet": "^5.2.1"
+    "react-helmet": "^5.2.1",
+    "utf8": "^3.0.0"
   },
   "devDependencies": {
     "prettier": "^1.19.1"
