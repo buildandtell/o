@@ -53,7 +53,8 @@ class FormPage extends React.Component {
     this.setState({desc: event.target.value});
   }
   handleLinkChange(event) {
-    let links = event.target.value.slice(',')
+    let links = event.target.value.split(',')
+    console.log(links)
     this.setState({links: links});
   }
   handleNoteChange(event) {
