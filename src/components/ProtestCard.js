@@ -32,7 +32,6 @@ class ProtestCard extends React.Component {
           <div className="notification is-info">
             {this.state.event.notes}
           </div>
-          <strong>Links: </strong>
           {this.state.event.links?this.state.event.links.map((e,i)=>(<a style={{paddingRight: '1rem'}} key={`${e}-${i}`} href={e}>Link {i+1}</a>)):<></>}
         </div>
         <footer className="card-footer"> </footer>
