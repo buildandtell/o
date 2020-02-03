@@ -16,6 +16,8 @@ class ProtestCard extends React.Component {
     let res = await axios.get(`https://api.github.com/repos/buildandtell/o/contents/${this.props.filepath}`)
     let content = b64.decode(res.data.content)
     this.setState({event: JSON.parse(content)})
+  }
+  componentDidUpdate(){
     console.log(this.state)
   }
 

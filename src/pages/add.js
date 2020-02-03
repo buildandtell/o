@@ -23,7 +23,6 @@ class FormPage extends React.Component {
       links: [],
       notes: '',
       cap: '',
-      dir: '',
     };
     this.handleNameChange = this.handleNameChange.bind(this);
     this.handleCaptcha = this.handleCaptcha.bind(this);
@@ -54,7 +53,8 @@ class FormPage extends React.Component {
     this.setState({desc: event.target.value});
   }
   handleLinkChange(event) {
-    this.setState({links: event.target.value});
+    let links = event.target.value.slice(',')
+    this.setState({links: links});
   }
   handleNoteChange(event) {
     this.setState({notes: event.target.value});
@@ -73,23 +73,22 @@ class FormPage extends React.Component {
       // TODO: Add some notification.
     } else {
 
+      let dir = ''
       let sTime = new Date(this.state.time.valueOf())
       let now = new Date();
       now.setHours(0,0,0,0);
       sTime.setHours(0,0,0,0);
       if(datesAreOnSameDay(now, sTime)) {
-        this.setState({dir: "today"})
+        dir = "today"
       } else if (sTime < now) {
-        this.setState({dir: "past"})
+        dir = "past"
       } else if (sTime > now){
-        this.setState({dir: "upcoming"})
-      } else {
-        console.log("assa")
+        dir = "upcoming"
       }
       console.log(this.state)
 
       let stuff = {
-        dir: this.state.dir,
+        dir: dir,
         name: this.state.name,
         location: this.state.location,
         time: this.state.time,
