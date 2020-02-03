@@ -10,7 +10,9 @@ class TabContent extends React.Component {
     };
   }
 
-  async componentDidMount() { }
+  async componentDidMount() { 
+      console.log(this.props.listOfEvents)
+  }
 
   async componentDidUpdate() { }
 
@@ -18,8 +20,11 @@ class TabContent extends React.Component {
       return (
         <div>
             {this.props.listOfEvents.map((e,index)=>{
-                return <ProtestCard filepath={e} key={index}/>
+                return <ProtestCard filepath={e} key={e}/>
             })}
+            <div className="has-text-centered">
+            {this.props.listOfEvents.length===0?<p>No Events Here</p>:<></>}
+            </div>
         </div>
       )
   }

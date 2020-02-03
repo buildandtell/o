@@ -35,8 +35,8 @@ const Layout = ({ children }) => {
         }}
       >
         <main>{children}</main>
-        <footer>
-          <Link to="/permissions"> Permissions </Link>
+        <footer className="has-text-centered">
+          <Link to="/faq"> FAQ </Link>
         </footer>
       </div>
     </>

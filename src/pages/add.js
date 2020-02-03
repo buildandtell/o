@@ -22,7 +22,8 @@ class FormPage extends React.Component {
       desc: '',
       links: [],
       notes: '',
-      cap: ''
+      cap: '',
+      dir: '',
     };
     this.handleNameChange = this.handleNameChange.bind(this);
     this.handleCaptcha = this.handleCaptcha.bind(this);
@@ -78,12 +79,14 @@ class FormPage extends React.Component {
       sTime.setHours(0,0,0,0);
       if(datesAreOnSameDay(now, sTime)) {
         this.setState({dir: "today"})
-       console.log("today")
       } else if (sTime < now) {
         this.setState({dir: "past"})
       } else if (sTime > now){
         this.setState({dir: "upcoming"})
+      } else {
+        console.log("assa")
       }
+      console.log(this.state)
 
       let stuff = {
         dir: this.state.dir,

@@ -49,58 +49,7 @@ async function handleRequest(request) {
     return addcors(res)
   })
 
-
-
   return r.route(request)
-  //if (request.method === 'POST') {
-  //  const body = await request.json()
-  //  // TODO: Also check time and dir
-  //  if ((body.name == '' || body.name == undefined) && (body.location == ''||body.location == undefined)) {
-  //    let err = { err: 'Bad request' }
-
-  //    let response = new Response(JSON.stringify(err), {
-  //      status: 400,
-  //      headers: commonHeaders,
-  //    })
-  //    return addcors(response)
-  //  }
-
-  //  console.log(body)
-
-  //  const r = await createFile(body)
-  ////const r = await fetch(
-  ////  'https://api.github.com/repos/buildandtell/o/contents/data',
-  ////  {
-  ////    method: 'GET',
-  ////    headers: {
-  ////      'Content-Type': 'application/json',
-  ////      'User-Agent': 'oz',
-  ////    },
-  ////  },
-  ////)
-
-  ////let data = await r.json()
-  ////console.log(data)
-
-  //  let response = new Response('{"body":"Registered."}', {
-  //    status: 201,
-  //    headers: commonHeaders,
-  //  })
-
-  //  return addcors(response)
-
-  //} else if (request.method === 'OPTIONS') {
-  //  response = new Response(JSON.stringify(['OK']), {
-  //    status: 200,
-  //    headers: commonHeaders,
-  //  })
-  //} else {
-  //  let err = { err: 'Expected POST' }
-  //  response = new Response(JSON.stringify(err), {
-  //    status: 405,
-  //    headers: commonHeaders,
-  //  })
-  //}
 
 }
 

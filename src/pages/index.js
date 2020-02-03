@@ -34,7 +34,9 @@ class IndexPage extends React.Component {
   async componentDidMount() {
     let dirname = getDirName(this.state.selectedTab)
     let res = await axios.get(`https://api.github.com/repos/buildandtell/o/contents/data/${dirname}`)
-    this.setState({listOfEvents: res.data.map(e=>e.path) })
+    let filenames = res.data.map(e=>e.path)
+    filenames = filenames.filter(e=>{ if(e[e.length-1] === "X"){ return false } return true })
+    this.setState({listOfEvents: filenames })
     let offset = this.state.offset
     let limit = this.state.limit
     let selectedEvents = this.state.listOfEvents.slice(offset,offset+limit)
@@ -43,7 +45,7 @@ class IndexPage extends React.Component {
     if(this.state.offset < this.state.listOfEvents.length){
       this.setState({showloadmore: true})
     }
-    console.log(this.state)
+    //console.log(this.state)
   }
 
   onLoadMore() {
@@ -72,8 +74,9 @@ class IndexPage extends React.Component {
 
     let dirname = getDirName(id)
     let res = await axios.get(`https://api.github.com/repos/buildandtell/o/contents/data/${dirname}`)
-    this.setState({listOfEvents: res.data.map(e=>e.path) })
-    console.log(this.state)
+    let filenames = res.data.map(e=>e.path)
+    filenames = filenames.filter(e=>{ if(e[e.length-1] === "X"){ return false } return true })
+    this.setState({listOfEvents: filenames })
     let offset = this.state.offset
     let limit = this.state.limit
     let selectedEvents = this.state.listOfEvents.slice(offset,offset+limit)
@@ -82,6 +85,7 @@ class IndexPage extends React.Component {
     if(this.state.offset < this.state.listOfEvents.length){
       this.setState({showloadmore: true})
     }
+    console.log(this.state)
   }
 
   render() {
@@ -100,7 +104,7 @@ class IndexPage extends React.Component {
           <li className="oz-tabs" id="tab-2" onClick={()=>this.onTabClick(2)}><a>Past</a></li>
         </ul>
       </div>
-      <div className="content center has-text-centered"> 
+      <div className="content center"> 
         <TabContent listOfEvents={this.state.listOfEventsToShow}/>
         {this.state.showloadmore?
           <a onClick={this.onLoadMore} className="button">Load More</a>:
