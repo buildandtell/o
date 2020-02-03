@@ -17,9 +17,7 @@ class ProtestCard extends React.Component {
     let content = b64.decode(res.data.content)
     this.setState({event: JSON.parse(content)})
   }
-  componentDidUpdate(){
-    console.log(this.state)
-  }
+  componentDidUpdate(){ }
 
   render(){
     return (
@@ -33,10 +31,10 @@ class ProtestCard extends React.Component {
           <strong>Location:</strong> {this.state.event.location}
 
           <div className="notification is-info">
-            {this.state.event.note}
+            {this.state.event.notes}
           </div>
           <strong>Links: </strong>
-
+          {this.state.event.links?this.state.event.links.map((e,i)=>(<a style={{paddingRight: '1rem'}} key={`${e}-${i}`} href={e}>Link {i+1}</a>)):<></>}
         </div>
         <footer className="card-footer"> </footer>
       </div>

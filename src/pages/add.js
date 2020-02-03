@@ -23,6 +23,7 @@ class FormPage extends React.Component {
       links: [],
       notes: '',
       cap: '',
+      success: false,
     };
     this.handleNameChange = this.handleNameChange.bind(this);
     this.handleCaptcha = this.handleCaptcha.bind(this);
@@ -54,7 +55,6 @@ class FormPage extends React.Component {
   }
   handleLinkChange(event) {
     let links = event.target.value.split(',')
-    console.log(links)
     this.setState({links: links});
   }
   handleNoteChange(event) {
@@ -65,7 +65,7 @@ class FormPage extends React.Component {
   }
 
 
-  handleSubmit(event) {
+  async handleSubmit(event) {
     event.preventDefault()
     // check time invalid and check capcha
 
@@ -86,7 +86,6 @@ class FormPage extends React.Component {
       } else if (sTime > now){
         dir = "upcoming"
       }
-      console.log(this.state)
 
       let stuff = {
         dir: dir,
@@ -99,13 +98,11 @@ class FormPage extends React.Component {
       }
 
       // TODO: Remove log
-      console.log(JSON.stringify(stuff))
 
-      axios.post('https://submit-event.ozpatoki.workers.dev/add-event', stuff).then(function (response) {
-        console.log(response);
-      }).catch(function (error) {
-        console.log(error);
-      });
+      let res = await axios.post('https://submit-event.ozpatoki.workers.dev/add-event', stuff)
+      if(res.status === 201){
+        this.setState({success: true})
+      }
 
     }
   }
@@ -114,13 +111,10 @@ class FormPage extends React.Component {
     return (
     <Layout>
     <SEO title="Add Protest" />
-<div 
-style={{
-  marginBottom: "2rem"
-}}
->
+<div style={{ marginBottom: "2rem" }} >
   <small>*Submit info in which ever language you prefer. </small>
 
+{!this.state.success?
 <form onSubmit={this.handleSubmit}>
 <div className="field">
   <label htmlFor="name" className="label">Name</label>
@@ -195,6 +189,13 @@ style={{
 </div>
 
 </form>
+:<div className="notification">
+  Successfully submitted, should show up in the main page now. One more step towards the death of Fascism.
+</div>
+}
+
+
+
 </div>
 </Layout>
 

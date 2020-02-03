@@ -45,7 +45,7 @@ async function handleRequest(request) {
 
     const fileCreation = await createFile(body)
 
-    let res = new Response(JSON.stringify(fileCreation), { status: 200, headers: commonHeaders })
+    let res = new Response(JSON.stringify(fileCreation), { status: 201, headers: commonHeaders })
     return addcors(res)
   })
 

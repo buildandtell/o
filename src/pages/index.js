@@ -56,10 +56,8 @@ class IndexPage extends React.Component {
     this.setState({listOfEventsToShow: this.state.listOfEventsToShow.concat(selectedEvents)})
     this.setState({offset: newoffset})
     if(this.state.offset > this.state.listOfEvents.length){
-      console.log("poop")
       this.setState({showloadmore: false})
     }
-    console.log(this.state)
   }
 
   async onTabClick(id) {
@@ -85,7 +83,6 @@ class IndexPage extends React.Component {
     if(this.state.offset < this.state.listOfEvents.length){
       this.setState({showloadmore: true})
     }
-    console.log(this.state)
   }
 
   render() {

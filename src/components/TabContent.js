@@ -10,9 +10,7 @@ class TabContent extends React.Component {
     };
   }
 
-  async componentDidMount() { 
-      console.log(this.props.listOfEvents)
-  }
+  async componentDidMount() { }
 
   async componentDidUpdate() { }
 
