@@ -8,7 +8,6 @@ class ProtestCard extends React.Component {
     super(props);
     this.state = { 
       event: {},
-      display: true
     };
   }
 

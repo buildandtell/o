@@ -2,6 +2,7 @@ import Router from './router.js'
 import rs from 'randomstring'
 import utf8 from 'utf8'
 import b64 from 'base-64'
+import m from 'moment'
 
 addEventListener('fetch', event => {
   event.respondWith(handleRequest(event.request))
@@ -36,9 +37,13 @@ async function handleRequest(request) {
   r.post('/add-event', async req => {
     let body = await req.json()
 
-    // TODO: Also check time and dir
     if ((body.name == '' || body.name == undefined) && (body.location == ''||body.location == undefined)) {
       let err = { err: 'Bad request' }
+      let res = new Response(JSON.stringify(err), { status: 400, headers: commonHeaders, })
+      return addcors(res)
+    }
+    if(!m(body.time).isValid){
+      let err = { err: 'Bad time!' }
       let res = new Response(JSON.stringify(err), { status: 400, headers: commonHeaders, })
       return addcors(res)
     }
