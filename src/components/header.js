@@ -25,12 +25,12 @@ const Header = ({ siteTitle }) => (
   </Link>
 </div>
 <p className="buttons">
-  <button className="button is-small">
+  <a href="https://drive.google.com/folderview?id=1-MhPfzVqtXd-njyCWFwaztYHN1_f2gj7" className="button is-small">
     <span 
     style={{padding: `0 0.2rem 0 0`}}
     role="img" aria-label="flag"> 🚩 </span>
     <span>Posters</span>
-  </button>
+  </a>
   <button className="button is-small">
     <span 
     style={{padding: `0 0.2rem 0 0`}}
